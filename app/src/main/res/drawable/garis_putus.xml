@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Perlu android:layerType="software" pada View yang memakainya -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <stroke
+        android:width="2dp"
+        android:color="#DED3BE"
+        android:dashWidth="7dp"
+        android:dashGap="6dp" />
+</shape>
