@@ -2,26 +2,25 @@ package com.example.lokettiket
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.text.NumberFormat
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-
-    private val hargaPerTiket = 35_000
+    private val hargaPerTiket = 25_000
     private val jumlahMinimal = 1
-    private val jumlahMaksimal = 6
+    private val jumlahMaksimal = 10
 
     private var jumlahTiket = jumlahMinimal
 
     private lateinit var tvHarga: TextView
     private lateinit var tvJumlah: TextView
     private lateinit var tvTotal: TextView
-    private lateinit var tvCatatan: TextView
     private lateinit var btnKurang: ImageButton
     private lateinit var btnTambah: ImageButton
-    private lateinit var btnReset: TextView
+    private lateinit var btnReset: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         tvHarga = findViewById(R.id.tv_harga)
         tvJumlah = findViewById(R.id.tv_jumlah)
         tvTotal = findViewById(R.id.tv_total)
-        tvCatatan = findViewById(R.id.tv_catatan)
         btnKurang = findViewById(R.id.btn_kurang)
         btnTambah = findViewById(R.id.btn_tambah)
         btnReset = findViewById(R.id.btn_reset)
@@ -66,19 +64,14 @@ class MainActivity : AppCompatActivity() {
 
         btnKurang.isEnabled = jumlahTiket > jumlahMinimal
         btnTambah.isEnabled = jumlahTiket < jumlahMaksimal
-        btnKurang.alpha = if (btnKurang.isEnabled) 1f else 0.35f
-        btnTambah.alpha = if (btnTambah.isEnabled) 1f else 0.35f
-
-        tvCatatan.text = when (jumlahTiket) {
-            jumlahMaksimal -> "Batas maksimal $jumlahMaksimal tiket per transaksi"
-            else -> "Sisa kuota ${jumlahMaksimal - jumlahTiket} tiket lagi"
-        }
+        btnKurang.alpha = if (btnKurang.isEnabled) 1f else 0.4f
+        btnTambah.alpha = if (btnTambah.isEnabled) 1f else 0.4f
     }
 
     private fun rupiah(nilai: Int): String {
         val format = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
         format.maximumFractionDigits = 0
-        return format.format(nilai).replace("Rp", "Rp ")
+        return format.format(nilai)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
